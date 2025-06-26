@@ -1,4 +1,11 @@
+import Image from "next/image";
+
 export default function Home() {
-  <img src="/echolog.svg" alt="echolog" width={100} height={100}/>
-  return <main>this is echolog!</main>;
+  return (
+    <main>
+      <Image src="/echolog.svg" alt="echolog" width={100} height={100}/>
+            this is echolog!
+    </main>
+  )
+  ;
 }
