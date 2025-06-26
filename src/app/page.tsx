@@ -1,3 +1,4 @@
 export default function Home() {
-  return <main>Hello, PKUIMUYY!</main>;
+  <img src="/echolog.svg" alt="echolog" width={100} height={100}/>
+  return <main>this is echolog!</main>;
 }
