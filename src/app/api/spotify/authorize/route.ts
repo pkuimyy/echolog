@@ -1,19 +1,10 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 
 export async function GET() {
   const clientId = process.env.SPOTIFY_CLIENT_ID;
   const redirectUri = `${process.env.NEXT_PUBLIC_BASE_URL}/api/spotify/callback`;
   const scope = encodeURIComponent('user-library-read user-read-email');
   const state = Math.random().toString(36).substring(2);
-
-  // 设置 HttpOnly Cookie 存储 state
-  (await cookies()).set('spotify_auth_state', state, {
-    httpOnly: true,
-    sameSite: 'lax',
-    maxAge: 300,
-    path: '/',
-  });
 
   const authorizeUrl =
         `https://accounts.spotify.com/authorize` +
@@ -22,5 +13,16 @@ export async function GET() {
         `&redirect_uri=${encodeURIComponent(redirectUri)}` +
         `&state=${state}`;
 
-  return NextResponse.redirect(authorizeUrl);
+  const response = NextResponse.redirect(authorizeUrl);
+
+  // 通过 response 设置 Cookie（这个才会发到浏览器）
+  response.cookies.set('spotify_auth_state', state, {
+    httpOnly: true,
+    sameSite: 'lax',
+    maxAge: 300,
+    path: '/',
+    secure: process.env.NODE_ENV === 'production',
+  });
+
+  return response;
 }
