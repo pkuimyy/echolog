@@ -25,20 +25,20 @@ export async function GET(req: NextRequest) {
 
   const clientId = process.env.SPOTIFY_CLIENT_ID!;
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET!;
+  const basic = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
   const redirectUri = `${process.env.NEXT_PUBLIC_BASE_URL}/api/spotify/callback`;
-
-  const body = new URLSearchParams({
-    grant_type: 'authorization_code',
-    code,
-    redirect_uri: redirectUri,
-    client_id: clientId,
-    client_secret: clientSecret,
-  });
 
   const tokenRes = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: body.toString(),
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization: `Basic ${basic}`,
+    },
+    body: new URLSearchParams({
+      grant_type: 'authorization_code',
+      code,
+      redirect_uri: redirectUri,
+    }).toString(),
   });
 
   if (!tokenRes.ok) {
