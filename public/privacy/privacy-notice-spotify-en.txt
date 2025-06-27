@@ -1,0 +1,33 @@
+We take your privacy very seriously. This project will obtain some user data from the Spotify platform based on your authorization. The data will only be used for academic research and will never be used for commercial purposes or shared with third parties.
+
+1. Data Types Collected
+
+After your authorization, we may access and collect the following information:
+- Your Spotify user ID (not for public display)
+- Top Tracks/Artists
+- Your playlist information (such as name, track list)
+- Other information you are allowed to access within the scope of authorization (such as country, email address, etc.)
+
+2. Data Purpose
+
+All collected data will be used only for academic research, for example:
+- Analyze users' music preferences and behavior patterns
+- Explore the relationship between listening behavior and cultural, emotional, social and other factors
+- Used in research papers, reports or teaching presentations, but no personally identifiable information will be disclosed publicly
+
+3. Data Processing and Protection
+
+- The data will be anonymized, and sensitive information such as email addresses and user IDs will be removed or desensitized
+- Research data will be stored in secure storage and only authorized researchers can access it
+- After the project is completed, the original data will be destroyed or retained anonymously within an appropriate period of time
+
+4. User Rights
+
+- You can always access the data through Spotify Official authorization management page to revoke authorization (https://www.spotify.com/account/apps/)
+- If you want us to delete all research data related to you, please send an email to the research contact
+- You have the right to know the content and purpose of any information we collect about you
+
+5. Contact information
+
+If you have any questions or data deletion requests, please contact:
+pkuimyy@outlook.com
