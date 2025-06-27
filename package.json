@@ -8,7 +8,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+		"deploy": "dotenv -e .env.prod -- opennextjs-cloudflare build && dotenv -e .env.prod -- opennextjs-cloudflare deploy",
 		"preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
 		"cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts"
 	},
@@ -25,6 +25,7 @@
 		"@types/node": "^20.19.1",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
+		"dotenv-cli": "^8.0.0",
 		"eslint": "^9",
 		"eslint-config-next": "15.3.4",
 		"tailwindcss": "^4",
