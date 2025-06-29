@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { SpotifyCookie } from "@/lib/constants/spotify";
 
 export async function GET() {
   const clientId = process.env.SPOTIFY_CLIENT_ID;
@@ -16,7 +17,7 @@ export async function GET() {
   const response = NextResponse.redirect(authorizeUrl);
 
   // 通过 response 设置 Cookie（这个才会发到浏览器）
-  response.cookies.set('spotify_auth_state', state, {
+  response.cookies.set(SpotifyCookie.AuthState, state, {
     httpOnly: true,
     sameSite: 'lax',
     maxAge: 300,

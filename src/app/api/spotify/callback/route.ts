@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { SpotifyCookie } from "@/lib/constants/spotify";
 
 interface SpotifyTokenResponse {
     access_token: string;
@@ -12,11 +13,21 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const code = searchParams.get('code');
   const returnedState = searchParams.get('state');
-  const savedState = req.cookies.get('spotify_auth_state')?.value;
+  const savedState = req.cookies.get(SpotifyCookie.AuthState)?.value;
 
   // 校验 code 和 state（防止 CSRF 攻击）
-  if (!code || !returnedState) {
-    return NextResponse.json({ error: 'Missing code or state' }, { status: 400 });
+  if (!code || !returnedState || !savedState || returnedState !== savedState) {
+    const res = NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}/?error=auth_restart_required`);
+    res.cookies.set(SpotifyCookie.AuthState, '', {
+      httpOnly: true,
+      path: '/',
+      maxAge: 0,
+    });
+    return res;
+  }
+
+  if (returnedState !== savedState) {
+    return NextResponse.json({ error: 'Invalid state (possible CSRF)' }, { status: 403 });
   }
 
   if (returnedState !== savedState) {
@@ -54,7 +65,7 @@ export async function GET(req: NextRequest) {
   const maxAge = tokenData.expires_in || 3600;
 
   // 设置 access_token（仅服务端可读）
-  response.cookies.set('spotify_access_token', tokenData.access_token, {
+  response.cookies.set(SpotifyCookie.AccessToken, tokenData.access_token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     path: '/',
@@ -64,7 +75,7 @@ export async function GET(req: NextRequest) {
 
   // 可选：设置 refresh_token（用于将来刷新 token）
   if (tokenData.refresh_token) {
-    response.cookies.set('spotify_refresh_token', tokenData.refresh_token, {
+    response.cookies.set(SpotifyCookie.RefreshToken, tokenData.refresh_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       path: '/',
@@ -74,7 +85,7 @@ export async function GET(req: NextRequest) {
   }
 
   // 清除 state（避免重用）
-  response.cookies.set('spotify_auth_state', '', {
+  response.cookies.set(SpotifyCookie.AuthState, '', {
     httpOnly: true,
     path: '/',
     maxAge: 0,
