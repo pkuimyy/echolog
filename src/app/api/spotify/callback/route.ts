@@ -26,14 +26,6 @@ export async function GET(req: NextRequest) {
     return res;
   }
 
-  if (returnedState !== savedState) {
-    return NextResponse.json({ error: 'Invalid state (possible CSRF)' }, { status: 403 });
-  }
-
-  if (returnedState !== savedState) {
-    return NextResponse.json({ error: 'Invalid state (possible CSRF)' }, { status: 403 });
-  }
-
   const clientId = process.env.SPOTIFY_CLIENT_ID!;
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET!;
   const basic = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');

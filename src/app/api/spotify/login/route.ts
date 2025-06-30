@@ -14,16 +14,17 @@ export async function GET() {
         `&redirect_uri=${encodeURIComponent(redirectUri)}` +
         `&state=${state}`;
 
-  const response = NextResponse.redirect(authorizeUrl);
+  // 构造响应，返回 authorizeUrl，供前端跳转用
+  const res = NextResponse.json({ authorizeUrl });
 
-  // 通过 response 设置 Cookie（这个才会发到浏览器）
-  response.cookies.set(SpotifyCookie.AuthState, state, {
+  // 设置 cookie：AuthState，用于防止 CSRF
+  res.cookies.set(SpotifyCookie.AuthState, state, {
     httpOnly: true,
-    sameSite: 'lax',
-    maxAge: 300,
-    path: '/',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     secure: process.env.NODE_ENV === 'production',
+    path: '/',
+    maxAge: 300, // 5分钟有效
   });
 
-  return response;
+  return res;
 }
