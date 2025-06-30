@@ -5,3 +5,7 @@ export function createFetchError(message: string, code: number): FetchError {
   error.code = code;
   return error;
 }
+
+export interface ErrorResponse {
+  message?: string;
+}
