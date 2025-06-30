@@ -1,15 +1,9 @@
 'use client';
 
-import useSWR from 'swr';
-import { SpotifyUser } from "@/types/spotify";
-
-const fetcher = (url: string): Promise<SpotifyUser> =>
-  fetch(url).then((res) => {
-    if (!res.ok) throw new Error('Failed to fetch user');
-    return res.json();
-  });
+import { useApi } from '@/hooks/useApi';
+import type { SpotifyUser } from '@/types/spotify';
 
 export function useSpotifyUser() {
-  const { data, error, isLoading } = useSWR('/api/spotify/me', fetcher);
-  return { user: data, isLoading, error };
+  const { data: user, error, isLoading, isUnauthorized } = useApi<SpotifyUser>('/api/spotify/me');
+  return { user, error, isLoading, isUnauthorized };
 }
