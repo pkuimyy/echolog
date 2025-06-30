@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { SpotifyLoginResponse } from "@/types/spotify";
 
@@ -11,7 +11,7 @@ export function SpotifyLoginButton() {
       if (data.authorizeUrl) {
         window.location.href = data.authorizeUrl;
       } else {
-        console.error('Authorization URL not found')
+        console.error('Authorization URL not found');
         alert('Login failed');
       }
     } catch (err) {
@@ -23,7 +23,7 @@ export function SpotifyLoginButton() {
   return (
     <button
       onClick={handleLogin}
-      className="px-4 py-2 text-sm bg-green-500 hover:bg-green-600 text-white rounded shadow"
+      className="px-3 py-1 text-sm bg-gray-800 text-white rounded hover:bg-gray-700 transition"
     >登录 Spotify</button>
-  )
+  );
 }

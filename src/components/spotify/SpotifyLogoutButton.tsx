@@ -21,7 +21,7 @@ export function SpotifyLogoutButton() {
   return (
     <button
       onClick={handleLogout}
-      className="px-4 py-2 text-sm bg-red-500 hover:bg-red-600 text-white rounded shadow"
+      className="px-3 py-1 text-sm bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition"
     >登出 Spotify</button>
   );
 }
