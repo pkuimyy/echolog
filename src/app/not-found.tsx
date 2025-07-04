@@ -1,8 +1,8 @@
 export default function NotFound() {
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>404 - 页面未找到</h1>
-      <p>您访问的页面不存在。</p>
+    <div className="text-center">
+      <h1 className="text-2xl font-bold mb-4">404 - Page Not Found</h1>
+      <p className="text-lg text-gray-600">Sorry, we couldn’t find the page you’re looking for.</p>
     </div>
   );
 }
