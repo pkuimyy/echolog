@@ -3,5 +3,3 @@ export const SpotifyCookie = {
   RefreshToken: 'spotify_refresh_token',
   AuthState: 'spotify_auth_state',
 } as const;
-
-export type SpotifyCookieKey = typeof SpotifyCookie[keyof typeof SpotifyCookie];

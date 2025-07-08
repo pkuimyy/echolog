@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { SpotifyCookie } from "@/lib/constants/spotify";
+import { SpotifyCookie } from "@/lib/shared/constants/spotify";
 
 interface SpotifyTokenResponse {
     access_token: string;

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { SpotifyCookie } from "@/lib/constants/spotify";
+import { SpotifyCookie } from "@/lib/shared/constants/spotify";
 
 export async function GET() {
   const clientId = process.env.SPOTIFY_CLIENT_ID;
