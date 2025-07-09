@@ -5,6 +5,7 @@ import { PaginatedList } from "@/components/pagination/PaginatedList";
 import { usePaginatedApi } from "@/lib/client/hooks/usePaginatedApi";
 import AlbumListItem from "@/components/spotify/AlbumListItem";
 import { Button } from "@/components/button/Button";
+import { useCsvExport } from "@/lib/client/hooks/useCsvExport";
 
 export default function AlbumsPage() {
   const {
@@ -18,6 +19,18 @@ export default function AlbumsPage() {
     currentPage,
     totalPages,
   } = usePaginatedApi<SpotifySavedAlbum>('/api/spotify/albums', 20);
+
+  const { exportCsv, isExporting } = useCsvExport<SpotifySavedAlbum>({
+    url: '/api/spotify/albums',
+    transformer: (item) => ({
+      name: item.album.name,
+      artists: item.album.artists.map((a) => a.name).join(', '),
+      release_date: item.album.release_date,
+      total_tracks: item.album.total_tracks,
+      spotify_url: item.album.external_urls.spotify,
+    }),
+    filename: 'spotify_albums.csv',
+  });
 
   if (error) {
     return (
@@ -39,7 +52,9 @@ export default function AlbumsPage() {
     <main className="w-full min-w-full max-w-screen-lg mx-auto px-4 py-8">
       <div className="w-full flex items-center space-x-4 mb-6">
         <h1 className="text-xl font-semibold">我收藏的专辑</h1>
-        <Button>下载为 csv</Button>
+        <Button onClick={exportCsv} disabled={isExporting}>
+          {isExporting ? '导出中...' : '下载为 CSV'}
+        </Button>
         <Button>下载为拼图</Button>
       </div>
 
