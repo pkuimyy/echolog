@@ -10,7 +10,7 @@ export function Button({ className, ...props }: ButtonProps) {
     <button
       {...props}
       className={cn(
-        'px-3 py-1 bg-gray-100 rounded hover:bg-gray-400 transition',
+        'px-3 py-1 text-sm bg-gray-100 rounded hover:bg-gray-400 transition',
         className
       )}
     />

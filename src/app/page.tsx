@@ -20,16 +20,16 @@ export default function HomePage() {
         </div>
 
         {/* 标题 */}
-        <h1 className="text-4xl font-bold mb-4">欢迎使用 echolog</h1>
+        <h1 className="text-2xl font-bold mb-4">欢迎使用 echolog</h1>
 
         {/* 描述 */}
-        <p className="text-gray-700 max-w-xl">
+        <p className="text-sm text-gray-700 max-w-xl">
                   echolog 是一个 Spotify 导出助手，帮你轻松导出你收藏的专辑和歌单。
         </p>
       </section>
 
       {/* 登录组件，宽度与卡片容器宽度一致 */}
-      <section className="max-w-xl mx-auto my-8">
+      <section className="max-w-xl mx-auto my-8 text-sm">
         <HomeAuthSection/>
       </section>
 
