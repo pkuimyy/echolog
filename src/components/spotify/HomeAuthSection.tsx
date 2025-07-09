@@ -7,7 +7,10 @@ export function HomeAuthSection() {
   const { user, isLoading, error, fetchUser, login, logout } = useSpotifyAuthStore();
 
   useEffect(() => {
-    fetchUser();
+    if (!user) {
+      fetchUser().catch(console.error);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchUser]);
 
   if (isLoading) {
@@ -20,7 +23,7 @@ export function HomeAuthSection() {
         <p>系统错误：{error.message || '请求失败'}</p>
         <button
           onClick={login}
-          className="px-3 py-1 text-sm bg-green-600 text-white rounded hover:bg-green-700 transition"
+          className="px-3 py-1 text-sm bg-[#006633] text-white rounded hover:bg-green-700 transition"
         >
                     重新登录
         </button>
@@ -34,7 +37,7 @@ export function HomeAuthSection() {
         <p>您尚未登录，请先登录。</p>
         <button
           onClick={login}
-          className="px-3 py-1 text-sm bg-green-600 text-white rounded hover:bg-green-700 transition"
+          className="px-3 py-1 text-sm bg-[#006633] text-white rounded hover:bg-green-700 transition"
         >
                     登录 Spotify
         </button>
@@ -43,7 +46,7 @@ export function HomeAuthSection() {
   }
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div className="flex sm:flex-row items-center justify-center">
       <p>
                 登录为 <strong>{user.display_name}</strong>（{user.email}）
       </p>

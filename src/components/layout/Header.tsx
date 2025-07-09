@@ -20,8 +20,8 @@ export default function Header() {
         </Link>
         <nav className="flex space-x-4 overflow-x-auto text-sm px-2 whitespace-nowrap text-gray-700">
           <Link href="/" className="hover:text-black">Home</Link>
-          <Link href="/albums" className="hover:text-black">Albums</Link>
-          <Link href="/playlists" className="hover:text-black">Playlists</Link>
+          <Link href="/spotify/albums" className="hover:text-black">Albums</Link>
+          <Link href="/spotify/playlists" className="hover:text-black">Playlists</Link>
         </nav>
       </div>
     </header>
