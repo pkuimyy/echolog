@@ -4,13 +4,13 @@ import { SpotifySavedAlbum } from '@/lib/shared/types/spotify';
 
 interface AlbumListItemProps {
     album: SpotifySavedAlbum['album'];
-    key?: number;
+    albumKey?: number;
 }
 
-export default function AlbumListItem({ album, key }: AlbumListItemProps) {
+export default function AlbumListItem({ album, albumKey }: AlbumListItemProps) {
   return (
     <li
-      key={album.id || key}
+      key={album.id || albumKey}
       className="grid grid-cols-[64px_3fr_3fr_1fr_0.5fr] items-center py-2 border-b last:border-none border-gray-200"
     >
       <img

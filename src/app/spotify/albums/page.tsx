@@ -78,7 +78,7 @@ export default function AlbumsPage() {
           </div>
         )}
         renderItem={(item, index) => (
-          <AlbumListItem album={item.album} key={index}/>
+          <AlbumListItem album={item.album} albumKey={index} key={item.album.id}/>
         )}
       />
     </main>
