@@ -52,6 +52,7 @@ export async function GET(req: NextRequest) {
   const tokenData: SpotifyTokenResponse = await tokenRes.json();
 
   // 构造重定向响应
+  // 由后端控制跳转，而非前端，因为前端控制跳转需要修改 spotify 应用的回调地址，这个回调地址也应该是一个前端组件
   const response = NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}/`);
 
   const maxAge = tokenData.expires_in || 3600;
