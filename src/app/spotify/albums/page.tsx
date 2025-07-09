@@ -4,6 +4,7 @@ import { SpotifySavedAlbum } from '@/lib/shared/types/spotify';
 import { PaginatedList } from "@/components/pagination/PaginatedList";
 import { usePaginatedApi } from "@/lib/client/hooks/usePaginatedApi";
 import AlbumListItem from "@/components/spotify/AlbumListItem";
+import { Button } from "@/components/button/Button";
 
 export default function AlbumsPage() {
   const {
@@ -36,12 +37,10 @@ export default function AlbumsPage() {
 
   return (
     <main className="w-full min-w-full max-w-screen-lg mx-auto px-4 py-8">
-      <div className="w-full flex items-center justify-between">
-        <h1 className="text-xl font-semibold mb-6">我的 Spotify 保存专辑</h1>
-        <div>
-          <button className="mr-4">下载为 csv</button>
-          <button>下载为拼图</button>
-        </div>
+      <div className="w-full flex items-center space-x-4 mb-6">
+        <h1 className="text-xl font-semibold">我收藏的专辑</h1>
+        <Button>下载为 csv</Button>
+        <Button>下载为拼图</Button>
       </div>
 
       <PaginatedList

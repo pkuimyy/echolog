@@ -1,10 +1,11 @@
 'use client';
 
 import { ReactNode } from 'react';
+import { Button } from "@/components/button/Button";
 
 interface PaginatedListProps<T> {
     items: T[];
-    renderItem: (item: T, index: number) => ReactNode;
+    renderItem: (item: T, key: number) => ReactNode;
     hasNextPage: boolean;
     hasPrevPage: boolean;
     onNextPage: () => void;
@@ -30,27 +31,28 @@ export function PaginatedList<T>(x: PaginatedListProps<T>) {
         {x.items.map(x.renderItem)}
       </ul>
 
-      <div className="flex justify-between items-center mt-4 space-x-4 text-sm text-gray-600">
-        <button
+      <div className="flex justify-between items-center mt-4 space-x-4 text-gray-600">
+        <Button
           onClick={x.onPrevPage}
           disabled={!x.hasPrevPage}
-          className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+          className="bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
         >
-                    上一页
-        </button>
+                  上一页
+        </Button>
 
         <span>
-          第 {x.currentPage} 页 / 共 {x.totalPages} 页
+    第 {x.currentPage} 页 / 共 {x.totalPages} 页
         </span>
 
-        <button
+        <Button
           onClick={x.onNextPage}
           disabled={!x.hasNextPage}
-          className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+          className="bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
         >
-                    下一页
-        </button>
+                  下一页
+        </Button>
       </div>
+
     </div>
   );
 }
