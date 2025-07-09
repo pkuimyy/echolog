@@ -3,52 +3,50 @@
 import { ReactNode } from 'react';
 
 interface PaginatedListProps<T> {
-    items: T[]
-    renderItem: (item: T, index: number) => ReactNode
-    offset: number
-    limit: number
-    total: number
-    onPageChange: (newOffset: number) => void
+    items: T[];
+    renderItem: (item: T, index: number) => ReactNode;
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+    onNextPage: () => void;
+    onPrevPage: () => void;
+    currentPage: number;   // 当前页码，从1开始
+    totalPages: number;    // 总页数
+    renderHeader?: ReactNode | (() => ReactNode);  // 可选表头，ReactNode 或函数
+    isLoading?: boolean;
+    className?: string;
 }
 
-export function PaginatedList<T>({
-  items,
-  renderItem,
-  offset,
-  limit,
-  total,
-  onPageChange,
-}: PaginatedListProps<T>) {
-  const currentPage = Math.floor(offset / limit) + 1;
-  const totalPages = Math.ceil(total / limit);
+export function PaginatedList<T>(x: PaginatedListProps<T>) {
+  const className = x.className === undefined ? '' : x.className;
+  // 渲染表头，支持函数或 ReactNode
+  const headerContent =
+        typeof x.renderHeader === 'function' ? x.renderHeader() : x.renderHeader;
 
   return (
-    <div className="space-y-4">
-      <ul className="divide-y divide-gray-200">
-        {items.map((item, index) => (
-          <li key={index} className="py-2">
-            {renderItem(item, index)}
-          </li>
-        ))}
+    <div className={`w-full ${className}`}>
+      {headerContent && headerContent}
+
+      <ul className="w-full min-w-full">
+        {x.items.map(x.renderItem)}
       </ul>
 
-      <div className="flex justify-between items-center text-sm text-gray-600 pt-2">
+      <div className="flex justify-between items-center mt-4 space-x-4 text-sm text-gray-600">
         <button
-          onClick={() => onPageChange(offset - limit)}
-          disabled={offset === 0}
-          className="hover:text-black disabled:opacity-30"
+          onClick={x.onPrevPage}
+          disabled={!x.hasPrevPage}
+          className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
         >
                     上一页
         </button>
 
-        <span className="text-xs text-gray-500">
-          第 {currentPage} 页 / 共 {totalPages} 页
+        <span>
+          第 {x.currentPage} 页 / 共 {x.totalPages} 页
         </span>
 
         <button
-          onClick={() => onPageChange(offset + limit)}
-          disabled={offset + limit >= total}
-          className="hover:text-black disabled:opacity-30"
+          onClick={x.onNextPage}
+          disabled={!x.hasNextPage}
+          className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
         >
                     下一页
         </button>

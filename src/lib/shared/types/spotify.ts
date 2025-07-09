@@ -30,7 +30,8 @@ export interface SpotifySavedAlbum {
         total_tracks: number
         external_urls: {
             spotify: string
-        }
+        },
+        popularity: number
     }
 }
 
