@@ -26,6 +26,17 @@ export default function HomePage() {
         <p className="text-sm text-gray-700 max-w-xl">
                   echolog 是一个 Spotify 导出助手，帮你轻松导出你收藏的专辑和歌单。
         </p>
+
+        {/* GitHub 链接 */}
+        <a
+          href="https://github.com/pkuimyy/echolog"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-flex items-center space-x-2 text-sm hover:underline"
+        >
+          <Image src="/github.svg" alt="GitHub" width={20} height={20} />
+          <span>已在 GitHub 开源</span>
+        </a>
       </section>
 
       {/* 登录组件，宽度与卡片容器宽度一致 */}
