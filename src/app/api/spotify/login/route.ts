@@ -12,7 +12,8 @@ export async function GET() {
         `?response_type=code&client_id=${clientId}` +
         `&scope=${scope}` +
         `&redirect_uri=${encodeURIComponent(redirectUri)}` +
-        `&state=${state}`;
+        `&state=${state}` +
+        `&show_dialog=true`;
 
   // 构造响应，返回 authorizeUrl，供前端跳转用
   const res = NextResponse.json({ authorizeUrl });
